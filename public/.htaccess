@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /restaurantapp/
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /restaurantapp/index.html [L]
+
+
+
+  
