@@ -9,13 +9,13 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import ReactPaginate from "react-paginate";
 
-let baseURL = '';
+// let baseURL = '';
 
-if (process.env.NODE_ENV === 'development') {
-  baseURL = 'http://localhost:5000';
-} else {
-  baseURL = 'http://83.223.113.92:3000';
-}
+// if (process.env.NODE_ENV === 'development') {
+//   baseURL = 'http://localhost:5000';
+// } else {
+//   baseURL = 'http://83.223.113.92:3000';
+// }
 
 function Categories() {
   const navigate = useNavigate()

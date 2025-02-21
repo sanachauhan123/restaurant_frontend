@@ -6,13 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import TableBar from '@mui/icons-material/TableBar';
 
-let baseURL = '';
+// let baseURL = '';
 
-  if (process.env.NODE_ENV === 'development') {
-    baseURL = 'http://localhost:5000';
-  } else {
-    baseURL = 'http://83.223.113.92:3000';
-  }
+//   if (process.env.NODE_ENV === 'development') {
+//     baseURL = 'http://localhost:5000';
+//   } else {
+//     baseURL = 'http://83.223.113.92:3000';
+//   }
 
 function AddTable(){
   const navigator = useNavigate();
