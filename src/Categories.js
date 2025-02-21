@@ -62,7 +62,7 @@ const [search, setSearch] = useState("");
 
   useEffect(()=>{
     const getData = async() =>{
-      axios.get(`${baseURL}/api/categories`).then((res)=>{
+      axios.get(`https://resbackend-one.vercel.app/api/categories`).then((res)=>{
         //console.log(res.data.data)
         setTable(res.data.data)
         setAllOrders(res.data.data);

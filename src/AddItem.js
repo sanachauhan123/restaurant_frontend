@@ -89,7 +89,7 @@ useEffect(() => {
   const handleDelete = async(id) => {
     alert('Are you sure to delete?')
     try {
-      await axios.delete(`${baseURL}/api/menu/${id}`)
+      await axios.delete(`https://resbackend-one.vercel.app/api/menu/${id}`)
         .then((res) => {
           console.log(res);
           // Update the state to remove the deleted item from the table

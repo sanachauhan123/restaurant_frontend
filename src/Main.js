@@ -22,7 +22,7 @@ function Main() {
   const navigate = useNavigate();
   useEffect(() => {
     const getItem = async (e) => {
-      const result = await fetch(baseURL + "/api/menu");
+      const result = await fetch("https://resbackend-one.vercel.app/api/menu");
       const res = await result.json();
       setTableData(res)
 
