@@ -1,0 +1,8 @@
+{
+    "version": 2,
+    "routes": [
+        { "src": "/manifest.json", "dest": "/public/manifest.json" }
+      ],
+      "rewrites": [{ "source": "/(.*)", "destination": "public/index.html" }]
+  }
+  
