@@ -3,7 +3,6 @@ import CategoryRoundedIcon from '@mui/icons-material/CategoryRounded';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
 import TableBar from '@mui/icons-material/TableBar';
 
 // let baseURL = '';

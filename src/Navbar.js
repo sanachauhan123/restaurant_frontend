@@ -1,6 +1,4 @@
 import React from "react";
-import SearchIcon from '@mui/icons-material/Search';
-import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import { useNavigate } from "react-router-dom";
 

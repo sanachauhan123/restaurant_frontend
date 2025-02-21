@@ -3,13 +3,10 @@ import React, { useEffect, useState, useCallback, useContext, useRef } from 'rea
 import 'bootstrap/dist/js/bootstrap.bundle';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import CategoryRoundedIcon from '@mui/icons-material/CategoryRounded';
 import Receipt from '@mui/icons-material/Receipt';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import axios from 'axios';
-import { FaHandPointRight } from "react-icons/fa6";
-import { Cursor } from 'mongoose';
 import './index.css'
 
 // let baseURL = '';

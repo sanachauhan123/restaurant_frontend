@@ -2,7 +2,6 @@ import React, {useEffect, useState, useCallback, useContext} from 'react';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import CategoryRoundedIcon from '@mui/icons-material/CategoryRounded';
 import BallotIcon from '@mui/icons-material/Ballot'
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
