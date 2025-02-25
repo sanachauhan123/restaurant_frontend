@@ -106,6 +106,11 @@ export default function Table(){
         onChange={(e) => setSearch(e.target.value)}
       />
         <br /><br />
+
+        <div style={{ backgroundColor: 'rgb(243 244 246 )',padding:'0.5rem' }}>
+                <button className="Add_btn" onClick={()=>navigate('/admin/addtable')} >Add</button>
+              </div>
+
           <div className="row">
           <div style={{ padding: "20px" }}>
       <h1>Table Management</h1>
