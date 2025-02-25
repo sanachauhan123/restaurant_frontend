@@ -25,7 +25,7 @@ export default function Table(){
 
       useEffect(()=>{
         const getData = async() =>{
-            axios.get('https://resbackend-three.vercel.app/table').
+            axios.get('https://resbackend-three.vercel.app/api/table').
             then((res)=>{
                 //console.log(res.data.data);
                 setTable(res.data.data);
