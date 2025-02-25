@@ -41,7 +41,7 @@ function Cat_update() {
         setFormInputData(foundItem); // Set default form values
         //console.log(foundItem)
         // console.log(`${baseURL}/${foundItem.file}`)
-        setPreviewImage(`https://resbackend-three.vercel.app/images/${foundItem.file}`); // Set preview image if needed
+        setPreviewImage(foundItem.file); // Set preview image if needed
         setSelectedOption(foundItem.cat); // Set selected category
       } catch (error) {
         console.error('Error fetching item data:', error);
