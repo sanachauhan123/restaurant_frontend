@@ -29,7 +29,7 @@ function Table_update() {
  // Fetch the existing item data by its ID
     const fetchItemData = async () => {
       try {
-        const response = await axios.get(`https://resbackend-two.vercel.app/api/table`);
+        const response = await axios.get(`https://resbackend-three.vercel.app/api/table`);
         const result = response.data.data;
        // console.log(result)
         const foundItem = result.find(item => item._id === id);
@@ -62,7 +62,7 @@ function Table_update() {
     // formData.append("addtable", formInputData.addtable);
     // console.log(formData)
     try {
-        const res = await fetch(`https://resbackend-two.vercel.app/api/table/${id}`, {
+        const res = await fetch(`https://resbackend-three.vercel.app/api/table/${id}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"

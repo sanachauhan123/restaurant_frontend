@@ -31,7 +31,7 @@ export default function Print() {
 
   useEffect(() => {
     const getData = async () => {
-      axios.get(`https://resbackend-two.vercel.app/api/invoice`).
+      axios.get(`https://resbackend-three.vercel.app/api/invoice`).
         then((res) => {
           //console.log(res.data);
           const result = res.data;

@@ -2,7 +2,7 @@ import React, {useEffect, useState, useCallback, useContext} from 'react';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import BallotIcon from '@mui/icons-material/Ballot'
+import TableBar from '@mui/icons-material/TableBar';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +17,7 @@ import ReactPaginate from "react-paginate";
 //   baseURL = 'http://83.223.113.92:3000';
 // }
 
-export default function Order(){
+export default function Table(){
       const navigate = useNavigate();
       const [table,setTable] = useState([]);
       const [allOrders, setAllOrders] = useState([]); // Original data
@@ -25,15 +25,15 @@ export default function Order(){
 
       useEffect(()=>{
         const getData = async() =>{
-            axios.get('https://resbackend-three.vercel.app/api/ordered').
+            axios.get('https://resbackend-three.vercel.app/table').
             then((res)=>{
-                //console.log(res.data);
-                setTable(res.data);
-                setAllOrders(res.data)
+                //console.log(res.data.data);
+                setTable(res.data.data);
+                setAllOrders(res.data.data)
             })
         }
         getData()
-      })
+      },[])
 
       const [currentPage, setCurrentPage] = useState(1);
       const itemsPerPage = 5; // Change this to adjust items per page
@@ -47,36 +47,42 @@ export default function Order(){
       const handlePageChange = ({ selected }) => {
         const newPage = selected + 1; // ReactPaginate starts from 0, but pages start from 1
         setCurrentPage(newPage);
-        navigate(`/admin/order?page=${newPage}`, { replace: true });
+        navigate(`/admin/table?page=${newPage}`, { replace: true });
       };
 
         // Handle search
              useEffect(() => {
-              const filteredData = allOrders.filter((order) => {
-                const tableMatch = order.orderItems.some((item) =>
+              const filteredData = allOrders.filter((order) => 
+               
               
-                  item.tableNo.toString().includes(search)
+                  order.addtable.toString().includes(search)
                   
-              ); // Search by table number
+          // Search by table number
                 // const formattedDate = dayjs(order.createdAt).format("MM/DD/YYYY");
                 // const dateMatch = formattedDate.includes(search);
-                const tokenMatch = order.orderItems.some((item) =>
               
-                  item.tokenNo && item.tokenNo.toString().includes(search)
-                  
-                ); 
-                
-                const orderItemMatch = order.orderItems.some((item) =>
-                 
-                    item.title.toLowerCase().includes(search.toLowerCase()) // Search by item title
-                  
-                );
-          
-                return tableMatch || tokenMatch || orderItemMatch
-              });
+              );
           
               setTable(filteredData);
             }, [search, allOrders]);
+
+            const handleButtonClick = async(id) => {
+                navigate(`/admin/table_update?id=${id}&page=${currentPage}`)
+              }
+            
+              const handleDelete = async(id) => {
+                alert('Are you sure to delete?')
+                try {
+                  await axios.delete(`https://resbackend-three.vercel.app/api/table/${id}`)
+                    .then((res) => {
+                      console.log(res);
+                      // Update the state to remove the deleted item from the table
+                      setTable(prevTable => prevTable.filter(item => item._id !== id));
+                    });
+                } catch (error) {
+                  console.error('Error deleting data:', error);
+                }
+              }
      
     return(
         <>
@@ -88,8 +94,8 @@ export default function Order(){
     <div className='main-container'>
         <div className="center">
     <div className='head_div'>
-    <BallotIcon style={{fontSize:'30px'}} />
-        <h4 class="text" >Order Detail</h4>
+    <TableBar style={{fontSize:'30px'}} />
+        <h4 class="text" >Table Detail</h4>
         <button type="button" className="back_btn" onClick={()=>navigate('/admin/home')}>Back</button>
         </div>
         <div className="container_box" >
@@ -102,7 +108,7 @@ export default function Order(){
         <br /><br />
           <div className="row">
           <div style={{ padding: "20px" }}>
-      <h1>Orders</h1>
+      <h1>Table Management</h1>
       <table
         style={{
           width: "100%",
@@ -111,46 +117,33 @@ export default function Order(){
       >
         <thead>
           <tr>
-            <th style={styles.th}>Order ID</th>
+            <th style={styles.th}>ID</th>
             <th style={styles.th}>Table No</th>
-            <th style={styles.th}>Item Name</th>
-            <th style={styles.th}>Quantity</th>
-            <th style={styles.th}>Price</th>
-            <th style={styles.th}>Total</th>
+            <th style={styles.th}></th>
           </tr>
         </thead>
         <tbody>
-          {currentItems.map((order) =>
-            order.orderItems.map((item, index) => (
-              <tr key={`${order._id}-${index}`} style={styles.tr}>
-                {/* Display Order ID and Table No only once for the first item */}
-                {index === 0 && (
-                  <>
-                    <td style={styles.td} rowSpan={order.orderItems.length}>
-                      {order._id}
-                    </td>
-                    <td style={styles.td} rowSpan={order.orderItems.length}>
-                      {item.tableNo}
-                    </td>
-                  </>
-                )}
-                <td style={styles.td}>{item.title}</td>
-                <td style={styles.td}>{item.quantity}</td>
-                <td style={styles.td}>{item.price}</td>
-                {index === 0 && (
-                  <td style={styles.td} rowSpan={order.orderItems.length}>
-                    ₹
-                    {order.orderItems
-                      .reduce(
-                        (acc, item) => acc + parseFloat(item.Total.slice(1)),
-                        0
-                      )
-                      .toFixed(2)}
-                  </td>
-                )}
-              </tr>
-            ))
-          )}
+        {currentItems.map((item,index)=>(
+            <tr key={item._id}>
+            <td style={styles.td}>{(currentPage - 1) * itemsPerPage + index + 1}</td>
+              <td style={styles.td}>{item.addtable}</td>
+              <td style={styles.td}>
+                {/* Button */}
+      <button 
+        style={styles.button} 
+        onClick={() => handleButtonClick(item._id)}
+      >
+        Update
+      </button>
+      <button 
+        style={styles.button2} 
+        onClick={() => handleDelete(item._id)}
+      >
+        Delete
+      </button>
+              </td>
+            </tr>
+        ))}
         </tbody>
       </table>
     </div>
@@ -169,6 +162,8 @@ export default function Order(){
               activeClassName={"active"}
               forcePage={currentPage - 1}
             />
+
+            
       </div>
 </div>
 
@@ -183,19 +178,46 @@ export default function Order(){
 }
 
 const styles = {
-  th: {
-    border: "1px solid #ddd",
-    padding: "8px",
-    backgroundColor: "#f4f4f4",
-    textAlign: "left",
-    fontWeight: "bold",
-  },
-  td: {
-    border: "1px solid #ddd",
-    padding: "8px",
-    verticalAlign: "top",
-  },
-  tr: {
-    backgroundColor: "#f9f9f9",
-  },
-};
+    table: {
+      width: "100%",
+      borderCollapse: "collapse",
+      marginTop: "20px",
+      fontSize: "16px",
+      textAlign: "left",
+    },
+    th: {
+      border: "1px solid #ddd",
+      padding: "8px",
+      backgroundColor: "#f4f4f4",
+      textAlign: "left",
+      fontWeight: "bold",
+    },
+    td: {
+      border: "1px solid #ddd", // Black border for table cells
+      padding: "8px",
+      verticalAlign: "top",
+    },
+    tr: {
+      backgroundColor: "#f9f9f9",
+      
+    },
+    button: {
+      padding: "8px 12px",
+      backgroundColor: "#007bff",
+      color: "white",
+      border: "none",
+      borderRadius: "4px",
+      cursor: "pointer",
+      fontSize: "14px",
+    },
+    button2: {
+      padding: "8px 12px",
+      backgroundColor: "#D22B2B",
+      color: "white",
+      border: "none",
+      borderRadius: "4px",
+      cursor: "pointer",
+      fontSize: "14px",
+      marginLeft: 10
+    }
+  };

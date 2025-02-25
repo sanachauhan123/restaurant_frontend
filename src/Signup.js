@@ -41,7 +41,7 @@ function Signup(){
 
 
         
-        const res = await fetch("https://resbackend-two.vercel.app/api/signup/",{
+        const res = await fetch("https://resbackend-three.vercel.app/api/signup/",{
           method:"POST",
           headers:{
             "Content-type":"application/json",

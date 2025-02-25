@@ -35,13 +35,13 @@ function Cat_update() {
  // Fetch the existing item data by its ID
     const fetchItemData = async () => {
       try {
-        const response = await axios.get(`https://resbackend-one.vercel.app/api/categories`);
+        const response = await axios.get(`https://resbackend-three.vercel.app/api/categories`);
         const result = response.data.data
         const foundItem = result.find(item => item._id === id);
         setFormInputData(foundItem); // Set default form values
         //console.log(foundItem)
         // console.log(`${baseURL}/${foundItem.file}`)
-        setPreviewImage(`https://resbackend-two.vercel.app/images/${foundItem.file}`); // Set preview image if needed
+        setPreviewImage(`https://resbackend-three.vercel.app/images/${foundItem.file}`); // Set preview image if needed
         setSelectedOption(foundItem.cat); // Set selected category
       } catch (error) {
         console.error('Error fetching item data:', error);
@@ -82,7 +82,7 @@ function Cat_update() {
     }
 
     try {
-        await axios.put(`https://resbackend-two.vercel.app/api/categories/${id}`, formData).then((res) => {
+        await axios.put(`https://resbackend-three.vercel.app/api/categories/${id}`, formData).then((res) => {
             console.log(res);
             navigate(`/admin/categories?page=${pageNumber}`, { replace: true });
         });

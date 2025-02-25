@@ -20,7 +20,7 @@ export default function Gst(){
     useEffect(()=>{
         const getData = async() =>{
             setLoading(true)
-            await axios.get('https://resbackend-two.vercel.app/gst-rates').then((res)=>{
+            await axios.get('https://resbackend-three.vercel.app/gst-rates').then((res)=>{
                 //console.log(res.data)
                 setData(res.data)
                // setLoading(false)

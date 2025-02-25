@@ -25,7 +25,7 @@ function Menu_update() {
       useEffect(()=>{
           const getData = async() =>{
               setLoading(true)
-              await axios.get('https://resbackend-two.vercel.app/gst-rates').then((res)=>{
+              await axios.get('https://resbackend-three.vercel.app/gst-rates').then((res)=>{
                   //console.log(res.data)
                   setData(res.data)
                  // setLoading(false)
@@ -71,13 +71,13 @@ function Menu_update() {
     // Fetch the existing item data by its ID
     const fetchItemData = async () => {
       try {
-        const response = await axios.get(`https://resbackend-two.vercel.app/api/menu`);
+        const response = await axios.get(`https://resbackend-three.vercel.app/api/menu`);
         const result = response.data.data;
         const foundItem = result.find((item) => item._id === id);
   //console.log(foundItem)
         if (foundItem) {
           setFormInputData(foundItem);
-          setPreviewImage(`https://resbackend-two.vercel.app${foundItem.file}`);
+          setPreviewImage(`https://resbackend-three.vercel.app.app${foundItem.file}`);
           //console.log(`http://stridedge.tech/restaurant${foundItem.file}`)
           // Set selectedOption to the category ID instead of the name
           const selectedCategory = menuItems.find(item => item.cat_name === foundItem.Categories);

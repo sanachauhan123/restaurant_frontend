@@ -62,7 +62,7 @@ const [search, setSearch] = useState("");
 
   useEffect(()=>{
     const getData = async() =>{
-      axios.get(`https://resbackend-one.vercel.app/api/categories`).then((res)=>{
+      axios.get(`https://resbackend-three.vercel.app/api/categories`).then((res)=>{
         //console.log(res.data.data)
         setTable(res.data.data)
         setAllOrders(res.data.data);
@@ -78,7 +78,7 @@ const [search, setSearch] = useState("");
   const handleDelete = async(id) => {
     alert('Are you sure to delete?')
     try {
-      await axios.delete(`https://resbackend-two.vercel.app/api/categories/${id}`)
+      await axios.delete(`https://resbackend-three.vercel.app/api/categories/${id}`)
         .then((res) => {
           console.log(res);
           // Update the state to remove the deleted item from the table

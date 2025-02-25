@@ -18,6 +18,7 @@ import Invoice from './Invoice';
 import Print from './print'
 import Gst from './Gst';
 import PrivateRoute from './PrivateRoute';
+import Table from './Table';
 
 import { BrowserRouter as Router ,Routes,Route } from 'react-router-dom';
 import {reducer,initialState} from './reducer/useReducer';
@@ -38,6 +39,7 @@ function App() {
 
         {/* Protected Routes */}
         <Route exact path="/admin/addtable" element={<PrivateRoute element={<AddTable />} />} />
+        <Route exact path="/admin/table" element={<PrivateRoute element={<Table />} />} />
         <Route exact path="/admin/categories" element={<PrivateRoute element={<Categories />} />} />
         <Route exact path="/admin/categories/new" element={<PrivateRoute element={<NewCategory />} />} />
         <Route exact path="/Main" element={<PrivateRoute element={<Main />} />} />
