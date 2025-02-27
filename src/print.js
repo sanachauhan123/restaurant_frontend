@@ -27,6 +27,7 @@ export default function Print() {
 
   const [table, setTable] = useState([]);
   const [name, setName] = useState("");
+  const [phone,setPhone] = useState("");
   const [Gst, setGst] = useState([])
 
   useEffect(() => {
@@ -77,7 +78,7 @@ export default function Print() {
   useEffect(() => {
     const getData = async () => {
       await axios.get('https://resbackend-three.vercel.app/gst-rates').then((res) => {
-        //console.log(res.data)
+       // console.log(res.data)
         setGst(res.data)
         // setLoading(false)
       })
@@ -173,6 +174,19 @@ export default function Print() {
               width: 100%;
               gap: 10px; 
             }
+               .screen-only {
+    display: none !important; 
+  }
+  .print-only {
+    display: inline !important; 
+    marginLeft:'5px'
+  }
+
+.info-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
 
             .print-row p, .print-row b {
               margin: 2px 0;
@@ -219,8 +233,19 @@ export default function Print() {
                   <h2>Foodies</h2>
                   <p>Akshya Nagar 1st Block 1st Cross, Rammurthy Nagar, Bangalore-560016, PH: +91 1451 454 489</p>
                   <hr />
+                  <div className="info-container">
+                                    <label>Name: 
+                    <span className="print-only" style={{display:"none",}}>{name}</span>
+                    <input className="screen-only" type="text" value={name} onChange={(e) => setName(e.target.value)} 
+                    style={{marginLeft:'5px'}}/>
+                  </label>
 
-                  <label>Name: <input type="text" value={name} onChange={(e) => setName(e.target.value)} /></label>
+                  <label>Phone: 
+                    <span className="print-only" style={{display:"none",}}>{phone}</span>
+                    <input className="screen-only" type="text" value={phone} onChange={(e) => setPhone(e.target.value)} 
+                    style={{marginLeft:'5px'}}/>
+                  </label>
+                  </div>
 
                   <hr />
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: 'flex-start' }}>

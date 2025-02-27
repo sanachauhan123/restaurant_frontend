@@ -77,6 +77,16 @@ export default function Order(){
           
               setTable(filteredData);
             }, [search, allOrders]);
+
+
+            const [categories, setCategories] = useState([]);
+
+            useEffect(() => {
+                fetch("http://localhost:5000/api/categories")
+                    .then((res) => res.json())
+                    .then((data) => console.log(data))
+                    .catch((err) => console.error(err));
+            }, []);
      
     return(
         <>

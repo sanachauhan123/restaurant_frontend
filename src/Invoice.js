@@ -11,6 +11,7 @@ import { FaHandPointRight } from "react-icons/fa6";
 import dayjs from "dayjs";
 import ReactPaginate from "react-paginate";
 
+
 // let baseURL = '';
 
 // if (process.env.NODE_ENV === 'development') {
@@ -36,35 +37,73 @@ export default function Invoice(){
         }
         getData()
       },[])
+     // console.log(allOrders)
 
        // Handle search
-       useEffect(() => {
-        const filteredData = allOrders.filter((order) => {
-          const searchLower = search.toLowerCase();
+      //  useEffect(() => {
+      //   const filteredData = allOrders.filter((order) => {
+      //     const searchLower = search.toLowerCase();
       
-          const tableMatch = order.tableNo.toString().includes(searchLower);
+      //     const tableMatch = order.tableNo.toString().includes(searchLower);
+      // //console.log(tableMatch)
+      //     const formattedDate = dayjs(order.createdAt).format("MM/DD/YYYY");
+      //     const dateMatch = formattedDate.includes(searchLower);
       
-          const formattedDate = dayjs(order.createdAt).format("MM/DD/YYYY");
-          const dateMatch = formattedDate.includes(searchLower);
+      //     const tokenMatch = order.orders.some((o) =>
+      //       o.orderItems.some(
+      //         (item) =>
+      //           item.tokenNo && item.tokenNo.toString().includes(searchLower) // Ensure tokenNo exists
+      //       )
+      //     );
       
-          const tokenMatch = order.orders.some((o) =>
-            o.orderItems.some(
-              (item) =>
-                item.tokenNo && item.tokenNo.toString().includes(searchLower) // Ensure tokenNo exists
-            )
+      //     const orderItemMatch = order.orders.some((o) =>
+      //       o.orderItems.some((item) =>
+      //         item.title.toLowerCase().includes(searchLower)
+      //       )
+      //     );
+      
+      //     return tableMatch || tokenMatch || orderItemMatch || dateMatch;
+      //   });
+      // setTable(filteredData)
+      //   //console.log(filteredData); // Debugging to check filtered results
+      // }, [search, allOrders]);
+
+      useEffect(() => {
+        // Assign a billNo before filtering
+        const ordersWithBillNo = allOrders.map((order, index) => ({
+          ...order,
+          billNo: (index + 1).toString(), // Convert to string for search
+        }));
+      
+        const filteredData = ordersWithBillNo.filter((order) => {
+          const searchText = search.toLowerCase();
+      
+          // Check if BillNo matches the search
+          const billNoMatch = order.billNo.includes(searchText);
+      
+          // Check if Table No matches
+          const tableMatch = order.tableNo.toString().includes(searchText);
+      
+          // Check if any order item title matches
+          const titleMatch = order.orders.some((orderGroup) =>
+            orderGroup.orderItems.some((item) => item.title.toLowerCase().includes(searchText))
           );
       
-          const orderItemMatch = order.orders.some((o) =>
-            o.orderItems.some((item) =>
-              item.title.toLowerCase().includes(searchLower)
-            )
-          );
+          // Format the `createdAt` date for search
+          const formattedDate = new Date(order.createdAt).toLocaleDateString("en-US", {
+            month: "2-digit",
+            day: "2-digit",
+            year: "numeric",
+          });
+          const dateMatch = formattedDate.includes(searchText);
       
-          return tableMatch || tokenMatch || orderItemMatch || dateMatch;
+          // Return true if any condition matches
+          return billNoMatch || tableMatch || titleMatch || dateMatch;
         });
-      setTable(filteredData)
-        //console.log(filteredData); // Debugging to check filtered results
+      
+        setTable(filteredData);
       }, [search, allOrders]);
+      
       
     
       //   setTable(filteredData);
@@ -155,7 +194,7 @@ export default function Invoice(){
                 <FaHandPointRight />
               </td>
               <td rowSpan={orderGroup.orderItems.length} style={styles.td}>{formattedDate}</td> {/* Display formatted date */}
-              <td rowSpan={orderGroup.orderItems.length} style={styles.td}>{index + 1}</td>
+              <td rowSpan={orderGroup.orderItems.length} style={styles.td}>{order.billNo}</td>
               <td rowSpan={orderGroup.orderItems.length} style={styles.td}>{order.tableNo}</td>
             </>
           )}
