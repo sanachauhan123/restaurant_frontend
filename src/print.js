@@ -76,7 +76,7 @@ export default function Print() {
 
   useEffect(() => {
     const getData = async () => {
-      await axios.get('https://resbackend-one.vercel.app/gst-rates').then((res) => {
+      await axios.get('https://resbackend-three.vercel.app/gst-rates').then((res) => {
         //console.log(res.data)
         setGst(res.data)
         // setLoading(false)
