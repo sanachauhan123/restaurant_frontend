@@ -71,7 +71,7 @@ function Menu_update() {
     // Fetch the existing item data by its ID
     const fetchItemData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/menu`);
+        const response = await axios.get(`https://resbackend-two.vercel.app/api/menu`);
         const result = response.data.data;
         const foundItem = result.find((item) => item._id === id);
   //console.log(foundItem)
