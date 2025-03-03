@@ -71,13 +71,14 @@ function Menu_update() {
     // Fetch the existing item data by its ID
     const fetchItemData = async () => {
       try {
-        const response = await axios.get(`https://resbackend-three.vercel.app/api/menu`);
+        const response = await axios.get(`http://localhost:5000/api/menu`);
         const result = response.data.data;
         const foundItem = result.find((item) => item._id === id);
   //console.log(foundItem)
         if (foundItem) {
           setFormInputData(foundItem);
-          setPreviewImage(`https://resbackend-three.vercel.app.app${foundItem.file}`);
+          setPreviewImage(foundItem.file);
+          console.log(foundItem.file)
           //console.log(`http://stridedge.tech/restaurant${foundItem.file}`)
           // Set selectedOption to the category ID instead of the name
           const selectedCategory = menuItems.find(item => item.cat_name === foundItem.Categories);
@@ -151,10 +152,10 @@ function Menu_update() {
     if (file) {
       setFormInputData({ ...formInputData, file });
       setPreviewImage(URL.createObjectURL(file));
-    }
+  }
   };
   //console.log(formInputData.Categories)
-
+  // console.log(formInputData.file)
   const updateData = async (e) => {
     e.preventDefault();
 
@@ -165,13 +166,18 @@ function Menu_update() {
     formData.append("price", formInputData.price);
     formData.append("priceWithGST", formInputData.priceWithGST);
 
-    // Append the file only if a new one is selected
-    if (formInputData.file && formInputData.file instanceof File) {
-        formData.append("file", formInputData.file);
+    if (formInputData.file) {
+      if (formInputData.file instanceof File) {
+        formData.append("file", formInputData.file); // Upload new file
+        console.log("Uploading new file...");
+      } else if (typeof formInputData.file === "string") {
+        formData.append("existingFile", formInputData.file); // Send existing file if no new file is selected
+        console.log("Using existing file:", formInputData.file);
+      }
     }
 
     try {
-        await axios.put(`https://resbackend-two.vercel.app/api/menu/${id}`, formData).then((res) => {
+        await axios.put(`https://resbackend-three.vercel.app/api/menu/${id}`, formData).then((res) => {
             console.log(res);
             navigate(`/admin/item?page=${pageNumber}`, { replace: true });
         });
@@ -241,7 +247,7 @@ function Menu_update() {
                           required
                         />
 
-                        <label htmlFor="gstPercentage">GST (%)</label>
+                        {/* <label htmlFor="gstPercentage">GST (%)</label>
                         <input type="text"  id="cgst"
         value={`${cgstRate}%`}
         style={{ width: "100%", marginBottom: "10px" }} readonly />
@@ -252,7 +258,7 @@ function Menu_update() {
 
                         <p>
                             <strong>Total Price (Including GST): ₹{formInputData.priceWithGST || "0.00"}</strong>
-                        </p>
+                        </p> */}
 
                         <label>Image</label>
                         <div className="image-container" onClick={() => document.getElementById('file').click()}>

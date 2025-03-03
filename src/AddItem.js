@@ -115,14 +115,20 @@ useEffect(() => {
 
    // Handle search
          useEffect(() => {
-          const filteredData = allOrders.filter((order) => {
+          const ordersWithSerialNumber = allOrders.map((order, index) => ({
+            ...order,
+            id: (index + 1).toString(), // Convert to string for search
+          }));
+        
+          const filteredData = ordersWithSerialNumber.filter((order) => {
       //console.log(order)
+      const serialMatch = order.id.includes(search);
             const tokenMatch = 
                 order.Categories.toLowerCase().includes(search.toLowerCase())
             const orderItemMatch =
                 order.cat_name.toLowerCase().includes(search.toLowerCase()) // Search by item title
             
-            return orderItemMatch || tokenMatch 
+            return orderItemMatch || tokenMatch || serialMatch;
           });
       
           setTable(filteredData);

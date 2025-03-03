@@ -23,7 +23,7 @@ function Cat_update() {
  // console.log(id);  // Log the ID for verification
   const [formInputData, setFormInputData] = useState({
     cat_name: '',
-    file: '',
+    file: null,
   });
 
   const [menuItems, setMenuItems] = useState([]);
@@ -42,6 +42,7 @@ function Cat_update() {
         //console.log(foundItem)
         // console.log(`${baseURL}/${foundItem.file}`)
         setPreviewImage(foundItem.file); // Set preview image if needed
+        //console.log(previewImage)
         setSelectedOption(foundItem.cat); // Set selected category
       } catch (error) {
         console.error('Error fetching item data:', error);
@@ -64,7 +65,7 @@ function Cat_update() {
   const handlePhoto = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFormInputData({ ...formInputData, file });
+      setFormInputData({ ...formInputData, file: e.target.files[0] });
       setPreviewImage(URL.createObjectURL(file));
     }
   };
@@ -75,14 +76,20 @@ function Cat_update() {
     // Create FormData to send file along with other fields
     const formData = new FormData();
     formData.append("cat_name", formInputData.cat_name);
-
+    console.log("Selected File:", formInputData.file); // Debugging log
     // Append the file only if a new one is selected
-    if (formInputData.file && formInputData.file instanceof File) {
-        formData.append("file", formInputData.file);
+    if (formInputData.file) {
+      if (formInputData.file instanceof File) {
+        formData.append("file", formInputData.file); // Upload new file
+        console.log("Uploading new file...");
+      } else if (typeof formInputData.file === "string") {
+        formData.append("existingFile", formInputData.file); // Send existing file if no new file is selected
+        console.log("Using existing file:", formInputData.file);
+      }
     }
 
     try {
-        await axios.put(`https://resbackend-three.vercel.app/api/categories/${id}`, formData).then((res) => {
+        await axios.put(`http://localhost:5000/api/categories/${id}`, formData).then((res) => {
             console.log(res);
             navigate(`/admin/categories?page=${pageNumber}`, { replace: true });
         });
