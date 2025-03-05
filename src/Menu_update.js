@@ -60,7 +60,7 @@ function Menu_update() {
     // Fetch the data for the menu categories
     const fetchMenuData = async () => {
       try {
-        const response = await fetch('https://resbackend-two.vercel.app/api/categories');
+        const response = await fetch('https://resbackend-three.vercel.app/api/categories');
         const data = await response.json();
         setMenuItems(data.data); // Store the fetched data
       } catch (error) {
@@ -71,10 +71,10 @@ function Menu_update() {
     // Fetch the existing item data by its ID
     const fetchItemData = async () => {
       try {
-        const response = await axios.get(`https://resbackend-two.vercel.app/api/menu`);
+        const response = await axios.get(`https://resbackend-three.vercel.app/api/menu`);
         const result = response.data.data;
         const foundItem = result.find((item) => item._id === id);
-  //console.log(foundItem)
+  console.log(foundItem)
         if (foundItem) {
           setFormInputData(foundItem);
           setPreviewImage(foundItem.file);
