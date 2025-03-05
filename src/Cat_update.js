@@ -89,7 +89,7 @@ function Cat_update() {
     }
 
     try {
-        await axios.put(`http://localhost:5000/api/categories/${id}`, formData).then((res) => {
+        await axios.put(`https://resbackend-three.vercel.app/api/categories/${id}`, formData).then((res) => {
             console.log(res);
             navigate(`/admin/categories?page=${pageNumber}`, { replace: true });
         });

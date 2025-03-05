@@ -31,7 +31,7 @@ function App() {
     return (
       <>
       {/*<BrowserRouter basename='/'>*/}
-      <Router>
+      <Router basename='/restaurant'>
       <Routes>
         {/* Public Routes */}
         <Route exact path="/" element={<Signup />} />
