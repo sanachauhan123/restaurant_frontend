@@ -74,11 +74,11 @@ function Menu_update() {
         const response = await axios.get(`https://resbackend-three.vercel.app/api/menu`);
         const result = response.data.data;
         const foundItem = result.find((item) => item._id === id);
-  //console.log(foundItem)
+  console.log(foundItem)
         if (foundItem) {
           setFormInputData(foundItem);
-          setPreviewImage(`https://resbackend-three.vercel.app${foundItem.file}`);
-         // console.log(foundItem.file)
+          setPreviewImage(foundItem.file);
+          console.log(foundItem.file)
           //console.log(`http://stridedge.tech/restaurant${foundItem.file}`)
           // Set selectedOption to the category ID instead of the name
           const selectedCategory = menuItems.find(item => item.cat_name === foundItem.Categories);

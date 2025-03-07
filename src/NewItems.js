@@ -138,7 +138,7 @@ useEffect(() => {
      formData.append('price', formInputData.price);
      formData.append('file', formInputData.file);
      formData.append("priceWithGST", formInputData.priceWithGST);
-     await axios.post('http://localhost:5000/api/menu', formData)
+     await axios.post('https://resbackend-three.vercel.app/api/menu', formData)
      .then(res => {
       console.log(res);
       navigator('/admin/item')
@@ -208,7 +208,7 @@ return(
        required
      />
 
-<label htmlFor="cgst">GST (%)</label>
+{/* <label htmlFor="cgst">GST (%)</label> */}
       {/* <input
         type="text"
         name="cgst"
@@ -218,7 +218,7 @@ return(
         style={{ width: "100%", marginBottom: "10px" }}
         readonly 
       /> */}
-      <input type="text"  id="cgst"
+       {/* <input type="text"  id="cgst"
         value={`${cgstRate}%`}
         style={{ width: "100%", marginBottom: "10px" }} readonly />
 
@@ -228,7 +228,7 @@ return(
 
       <p>
         <strong>Total Price (Including GST): ₹{formInputData.priceWithGST || "0.00"}</strong>
-      </p>
+      </p> */}
 
      <label>Image</label>
      <div className="image-container" onClick={() => document.getElementById('file').click()}>
