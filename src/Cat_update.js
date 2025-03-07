@@ -41,7 +41,7 @@ function Cat_update() {
         setFormInputData(foundItem); // Set default form values
         //console.log(foundItem)
         // console.log(`${baseURL}/${foundItem.file}`)
-        setPreviewImage(foundItem.file); // Set preview image if needed
+        setPreviewImage(`https://resbackend-three.vercel.app${foundItem.file}`); // Set preview image if needed
         //console.log(previewImage)
         setSelectedOption(foundItem.cat); // Set selected category
       } catch (error) {
@@ -91,7 +91,7 @@ function Cat_update() {
     try {
         await axios.put(`https://resbackend-three.vercel.app/api/categories/${id}`, formData).then((res) => {
             console.log(res);
-            navigate(`/admin/categories?page=${pageNumber}`, { replace: true });
+            navigate(`/admin/categories?page=${pageNumber}`);
         });
     } catch (error) {
         console.error("Error updating data:", error);

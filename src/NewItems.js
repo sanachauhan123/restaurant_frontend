@@ -119,18 +119,26 @@ useEffect(() => {
       }
     };
 
- 
+    // const generateShortId = () => {
+    //   return Math.random().toString(36).substring(2, 8); // Generate short random ID
+    // };
+    
+    // const createShortFilePath = (fileUrl) => {
+    //   const shortId = generateShortId();
+    //   return `https://yourapp.com/files/${shortId}`; // Store short ID in a database
+    // };
 
   const SaveData = async(e) =>{
       //console.log('save')
      e.preventDefault();
+    //  const shortFileUrl = formInputData.file ? createShortFilePath(formInputData.file) : "";
      const formData = new FormData();
      formData.append('cat_name', formInputData.cat_name);
      formData.append('Categories', formInputData.Categories);
      formData.append('price', formInputData.price);
      formData.append('file', formInputData.file);
      formData.append("priceWithGST", formInputData.priceWithGST);
-     await axios.post('https://resbackend-three.vercel.app/api/menu', formData)
+     await axios.post('http://localhost:5000/api/menu', formData)
      .then(res => {
       console.log(res);
       navigator('/admin/item')
