@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_API_URL;
+console.log("API_URL:", API_URL);
 
 function Login(){
     const Navigate = useNavigate();
@@ -19,20 +20,6 @@ function Login(){
     const handleSubmit = async(e)=>{
         e.preventDefault();
         const {username,password} = user
-        // axios.post(baseURL+'/api/login',{
-        //     user,password
-        // }).then(res=>{
-           
-        //     if(res.status === 422){
-        //             setErr("Login Failed");
-        //         }else{
-        //             localStorage.setItem('role', res.username);
-        //             localStorage.setItem('loginuser', res.auth);
-        //            setSuccess("Login SuccessFully");
-        //             setTimeout(()=> Navigate('/menu?page=1'),1000);
-        //         }
-        // })
-        // console.log(localStorage.getItem('role'))
         const res = await fetch(API_URL+'/api/login',{
             method:'POST',
             headers:{
