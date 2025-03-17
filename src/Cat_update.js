@@ -5,13 +5,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import axios from "axios";
 import { useNavigate, useParams, useLocation  } from "react-router-dom";
 
-// let baseURL = '';
-
-// if (process.env.NODE_ENV === 'development') {
-//   baseURL = 'http://localhost:5000';
-// } else {
-//   baseURL = 'http://83.223.113.92:3000';
-// }
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Cat_update() {
   const navigate = useNavigate();
@@ -35,7 +29,7 @@ function Cat_update() {
  // Fetch the existing item data by its ID
     const fetchItemData = async () => {
       try {
-        const response = await axios.get(`https://resbackend-three.vercel.app/api/categories`);
+        const response = await axios.get(`${API_URL}/api/categories`);
         const result = response.data.data
         const foundItem = result.find(item => item._id === id);
         setFormInputData(foundItem); // Set default form values
@@ -89,7 +83,7 @@ function Cat_update() {
     }
 
     try {
-        await axios.put(`https://resbackend-three.vercel.app/api/categories/${id}`, formData).then((res) => {
+        await axios.put(`${API_URL}/api/categories/${id}`, formData).then((res) => {
             console.log(res);
             navigate(`/admin/categories?page=${pageNumber}`);
         });

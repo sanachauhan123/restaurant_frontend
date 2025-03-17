@@ -9,20 +9,15 @@ import NewCategory from './newcat';
 import Navbar from './Navbar';
 import { useNavigate } from 'react-router-dom';
 
-// let baseURL = '';
 
-// if (process.env.NODE_ENV === 'development') {
-//   baseURL = 'http://localhost:5000';
-// } else {
-//   baseURL = 'http://83.223.113.92:3000';
-// }
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Main() {
   const [tableData, setTableData] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     const getItem = async (e) => {
-      const result = await fetch("https://resbackend-one.vercel.app/api/menu");
+      const result = await fetch(API_URL+"/api/menu");
       const res = await result.json();
       setTableData(res)
 

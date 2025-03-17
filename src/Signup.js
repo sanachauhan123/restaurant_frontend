@@ -4,13 +4,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-// let baseURL = '';
-
-//   if (process.env.NODE_ENV === 'development') {
-//     baseURL = 'http://localhost:5000';
-//   } else {
-//     baseURL = 'http://83.223.113.92:3000';
-//   }
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Signup(){
   
@@ -28,24 +22,10 @@ function Signup(){
         e.preventDefault();
       const {username,password} = user;
 
-  // axios.post(baseURL+'/api/signup',{
-  //         username,password
-  //       })  .then((res) => {
-  //         console.log("Server response: ", res);
-  //         setSuccess("signup successfully");
-  //         setTimeout(()=> Navigate('/login'),1000)
-  //     })
-  //     .catch((err) => {
-  //         console.log("Server respondend with error: ", err);
-  //     })
-
-
-        
-        const res = await fetch("https://resbackend-three.vercel.app/api/signup/",{
+        const res = await fetch(API_URL+"/api/signup/",{
           method:"POST",
           headers:{
             "Content-type":"application/json",
-            // "Access-Control-Allow-Origin": "http://yourapp.com"
           },
           body: JSON.stringify({
             username,password

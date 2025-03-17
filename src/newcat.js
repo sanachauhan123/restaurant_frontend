@@ -9,13 +9,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-// let baseURL = '';
-
-// if (process.env.NODE_ENV === 'development') {
-//   baseURL = 'http://localhost:5000';
-// } else {
-//   baseURL = 'http://83.223.113.92:3000';
-// }
+const API_URL = process.env.REACT_APP_API_URL;
 
 function NewCategory(){
     const navigator = useNavigate();
@@ -48,7 +42,7 @@ function NewCategory(){
        const formData = new FormData();
        formData.append('cat_name', formInputData.cat_name);
        formData.append('file', formInputData.file);
-       await axios.post('https://resbackend-three.vercel.app/api/categories', formData)
+       await axios.post(API_URL+'/api/categories', formData)
        .then(res => {
         console.log(res)
         //setTableData(res)

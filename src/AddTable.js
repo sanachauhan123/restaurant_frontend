@@ -5,13 +5,7 @@ import Navbar from './Navbar';
 import { useNavigate } from 'react-router-dom';
 import TableBar from '@mui/icons-material/TableBar';
 
-// let baseURL = '';
-
-//   if (process.env.NODE_ENV === 'development') {
-//     baseURL = 'http://localhost:5000';
-//   } else {
-//     baseURL = 'http://83.223.113.92:3000';
-//   }
+const API_URL = process.env.REACT_APP_API_URL;
 
 function AddTable(){
   const navigator = useNavigate();
@@ -24,7 +18,7 @@ function AddTable(){
       e.preventDefault();
       //console.log(tableno)
       const {addtable,status} = user;
-      const res = await fetch("https://resbackend-three.vercel.app/api/table",{
+      const res = await fetch(API_URL+"/api/table",{
           method:'POST',
           headers:{
               "Content-Type":"application/json"

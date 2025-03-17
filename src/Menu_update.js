@@ -5,13 +5,7 @@ import FormatListBulletedRoundedIcon from '@mui/icons-material/FormatListBullete
 import axios from "axios";
 import { useNavigate, useParams, useLocation  } from "react-router-dom";
 
-// let baseURL = '';
-
-// if (process.env.NODE_ENV === 'development') {
-//   baseURL = 'http://localhost:5000';
-// } else {
-//   baseURL = 'http://83.223.113.92:3000';
-// }
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Menu_update() {
   const navigate = useNavigate();
@@ -25,7 +19,7 @@ function Menu_update() {
       useEffect(()=>{
           const getData = async() =>{
               setLoading(true)
-              await axios.get('https://resbackend-three.vercel.app/gst-rates').then((res)=>{
+              await axios.get(API_URL+'/gst-rates').then((res)=>{
                   //console.log(res.data)
                   setData(res.data)
                  // setLoading(false)
@@ -60,7 +54,7 @@ function Menu_update() {
     // Fetch the data for the menu categories
     const fetchMenuData = async () => {
       try {
-        const response = await fetch('https://resbackend-three.vercel.app/api/categories');
+        const response = await fetch(API_URL+'/api/categories');
         const data = await response.json();
         setMenuItems(data.data); // Store the fetched data
       } catch (error) {
@@ -71,7 +65,7 @@ function Menu_update() {
     // Fetch the existing item data by its ID
     const fetchItemData = async () => {
       try {
-        const response = await axios.get(`https://resbackend-three.vercel.app/api/menu`);
+        const response = await axios.get(`${API_URL}/api/menu`);
         const result = response.data.data;
         const foundItem = result.find((item) => item._id === id);
   console.log(foundItem)
@@ -178,7 +172,7 @@ function Menu_update() {
     }
 
     try {
-        await axios.put(`https://resbackend-three.vercel.app/api/menu/${id}`, formData).then((res) => {
+        await axios.put(`${API_URL}/api/menu/${id}`, formData).then((res) => {
             console.log(res);
             navigate(`/admin/item?page=${pageNumber}`, { replace: true });
         });

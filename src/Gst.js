@@ -5,13 +5,7 @@ import Navbar from './Navbar';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import { useNavigate } from "react-router-dom";
 
-// let baseURL = '';
-
-//   if (process.env.NODE_ENV === 'development') {
-//     baseURL = 'http://localhost:5000';
-//   } else {
-//     baseURL = 'http://83.223.113.92:3000';
-//   }
+const API_URL = process.env.REACT_APP_API_URL;
 
 export default function Gst(){
     const navigator = useNavigate()
@@ -20,7 +14,7 @@ export default function Gst(){
     useEffect(()=>{
         const getData = async() =>{
             setLoading(true)
-            await axios.get('https://resbackend-three.vercel.app/gst-rates').then((res)=>{
+            await axios.get(API_URL+'/gst-rates').then((res)=>{
                 //console.log(res.data)
                 setData(res.data)
                // setLoading(false)

@@ -9,13 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactPaginate from "react-paginate";
 
-// let baseURL = '';
-
-// if (process.env.NODE_ENV === 'development') {
-//   baseURL = 'http://localhost:5000';
-// } else {
-//   baseURL = 'http://83.223.113.92:3000';
-// }
+const API_URL = process.env.REACT_APP_API_URL;
 
 export default function Table(){
       const navigate = useNavigate();
@@ -25,7 +19,7 @@ export default function Table(){
 
       useEffect(()=>{
         const getData = async() =>{
-            axios.get('https://resbackend-three.vercel.app/api/table').
+            axios.get(API_URL+'/api/table').
             then((res)=>{
                 //console.log(res.data.data);
                 setTable(res.data.data);
@@ -73,7 +67,7 @@ export default function Table(){
               const handleDelete = async(id) => {
                 alert('Are you sure to delete?')
                 try {
-                  await axios.delete(`https://resbackend-three.vercel.app/api/table/${id}`)
+                  await axios.delete(`${API_URL}/api/table/${id}`)
                     .then((res) => {
                       console.log(res);
                       // Update the state to remove the deleted item from the table

@@ -5,13 +5,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import axios from "axios";
 import { useNavigate, useParams, useLocation  } from "react-router-dom";
 
-// let baseURL = '';
-
-// if (process.env.NODE_ENV === 'development') {
-//   baseURL = 'http://localhost:5000';
-// } else {
-//   baseURL = 'http://83.223.113.92:3000';
-// }
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Table_update() {
   const navigate = useNavigate();
@@ -29,7 +23,7 @@ function Table_update() {
  // Fetch the existing item data by its ID
     const fetchItemData = async () => {
       try {
-        const response = await axios.get(`https://resbackend-three.vercel.app/api/table`);
+        const response = await axios.get(`${API_URL}/api/table`);
         const result = response.data.data;
        // console.log(result)
         const foundItem = result.find(item => item._id === id);
@@ -62,7 +56,7 @@ function Table_update() {
     // formData.append("addtable", formInputData.addtable);
     // console.log(formData)
     try {
-        const res = await fetch(`https://resbackend-three.vercel.app/api/table/${id}`, {
+        const res = await fetch(`${API_URL}/api/table/${id}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"

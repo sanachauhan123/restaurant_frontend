@@ -9,13 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactPaginate from "react-paginate";
 
-// let baseURL = '';
-
-// if (process.env.NODE_ENV === 'development') {
-//   baseURL = 'http://localhost:5000';
-// } else {
-//   baseURL = 'http://83.223.113.92:3000';
-// }
+const API_URL = process.env.REACT_APP_API_URL;
 
 export default function Order(){
       const navigate = useNavigate();
@@ -25,7 +19,7 @@ export default function Order(){
 
       useEffect(()=>{
         const getData = async() =>{
-            axios.get('https://resbackend-three.vercel.app/api/ordered').
+            axios.get(API_URL+'/api/ordered').
             then((res)=>{
                 //console.log(res.data);
                 setTable(res.data);
@@ -82,7 +76,7 @@ export default function Order(){
             const [categories, setCategories] = useState([]);
 
             useEffect(() => {
-                fetch("https://resbackend-three.vercel.app/api/categories")
+                fetch(API_URL+"/api/categories")
                     .then((res) => res.json())
                     .then((data) => console.log(data))
                     .catch((err) => console.error(err));

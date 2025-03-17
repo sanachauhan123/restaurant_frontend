@@ -9,13 +9,7 @@ import Navbar from './Navbar';
 import axios from 'axios';
 import './index.css'
 
-// let baseURL = '';
-
-// if (process.env.NODE_ENV === 'development') {
-//   baseURL = 'http://localhost:5000';
-// } else {
-//   baseURL = 'http://83.223.113.92:3000';
-// }
+const API_URL = process.env.REACT_APP_API_URL; 
 
 export default function Print() {
   const navigate = useNavigate()
@@ -32,7 +26,7 @@ export default function Print() {
 
   useEffect(() => {
     const getData = async () => {
-      axios.get(`https://resbackend-three.vercel.app/api/invoice`).
+      axios.get(`${API_URL}/api/invoice`).
         then((res) => {
           //console.log(res.data);
           const result = res.data;
@@ -77,7 +71,7 @@ export default function Print() {
 
   useEffect(() => {
     const getData = async () => {
-      await axios.get('https://resbackend-three.vercel.app/gst-rates').then((res) => {
+      await axios.get(API_URL+'/gst-rates').then((res) => {
        // console.log(res.data)
         setGst(res.data)
         // setLoading(false)
@@ -131,7 +125,7 @@ export default function Print() {
           }
           .receipt-container {
             width: 79.5mm;
-            font-size: 12px;
+            font-size: 10px;
             padding: 10px;
             border: 1px solid black;
           }

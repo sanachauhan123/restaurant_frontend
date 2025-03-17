@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-// let baseURL = '';
-
-//   if (process.env.NODE_ENV === 'development') {
-//     baseURL = 'http://localhost:5000';
-//   } else {
-//     baseURL = 'http://83.223.113.92:3000';
-//   }
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Login(){
     const Navigate = useNavigate();
@@ -39,7 +33,7 @@ function Login(){
         //         }
         // })
         // console.log(localStorage.getItem('role'))
-        const res = await fetch('https://resbackend-three.vercel.app/api/login',{
+        const res = await fetch(API_URL+'/api/login',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json',
