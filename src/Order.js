@@ -19,7 +19,7 @@ export default function Order(){
 
       useEffect(()=>{
         const getData = async() =>{
-            axios.get(API_URL+'/api/ordered').
+            axios.get('https://resbackend-three.vercel.app/api/ordered').
             then((res)=>{
                 //console.log(res.data);
                 setTable(res.data);

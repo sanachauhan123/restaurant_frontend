@@ -56,7 +56,7 @@ function Table_update() {
     // formData.append("addtable", formInputData.addtable);
     // console.log(formData)
     try {
-        const res = await fetch(`${API_URL}/api/table/${id}`, {
+        const res = await fetch(`https://resbackend-three.vercel.app/api/table/${id}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"

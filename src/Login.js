@@ -20,7 +20,7 @@ function Login(){
     const handleSubmit = async(e)=>{
         e.preventDefault();
         const {username,password} = user
-        const res = await fetch(API_URL+'/api/login',{
+        const res = await fetch('https://resbackend-three.vercel.app/api/login',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json',

@@ -18,7 +18,7 @@ function AddTable(){
       e.preventDefault();
       //console.log(tableno)
       const {addtable,status} = user;
-      const res = await fetch(API_URL+"/api/table",{
+      const res = await fetch("https://resbackend-three.vercel.app/api/table",{
           method:'POST',
           headers:{
               "Content-Type":"application/json"

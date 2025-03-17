@@ -42,7 +42,7 @@ function NewCategory(){
        const formData = new FormData();
        formData.append('cat_name', formInputData.cat_name);
        formData.append('file', formInputData.file);
-       await axios.post(API_URL+'/api/categories', formData)
+       await axios.post('https://resbackend-three.vercel.app/api/categories', formData)
        .then(res => {
         console.log(res)
         //setTableData(res)
