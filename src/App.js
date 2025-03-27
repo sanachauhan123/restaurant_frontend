@@ -24,7 +24,6 @@ import { BrowserRouter as Router ,Routes,Route } from 'react-router-dom';
 import {reducer,initialState} from './reducer/useReducer';
 
 export const UserContext = createContext();
-
 function App() {
 
   const Routing = () =>{

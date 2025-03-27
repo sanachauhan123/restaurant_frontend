@@ -10,14 +10,14 @@ import Navbar from './Navbar';
 import { useNavigate } from 'react-router-dom';
 
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = window.ENV?.API_URL;
 
 function Main() {
   const [tableData, setTableData] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     const getItem = async (e) => {
-      const result = await fetch("https://resbackend-three.vercel.app/api/menu");
+      const result = await fetch(API_URL+"/api/menu");
       const res = await result.json();
       setTableData(res)
 

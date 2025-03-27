@@ -9,7 +9,7 @@ import Navbar from './Navbar';
 import axios from 'axios';
 import './index.css'
 
-const API_URL = process.env.REACT_APP_API_URL; 
+const API_URL = window.ENV?.API_URL;
 
 export default function Print() {
   const navigate = useNavigate()
@@ -26,7 +26,7 @@ export default function Print() {
 
   useEffect(() => {
     const getData = async () => {
-      axios.get(`https://resbackend-three.vercel.app/api/invoice`).
+      axios.get(`${API_URL}/api/invoice`).
         then((res) => {
           //console.log(res.data);
           const result = res.data;
@@ -71,7 +71,7 @@ export default function Print() {
 
   useEffect(() => {
     const getData = async () => {
-      await axios.get('https://resbackend-three.vercel.app/gst-rates').then((res) => {
+      await axios.get(API_URL+'/gst-rates').then((res) => {
        // console.log(res.data)
         setGst(res.data)
         // setLoading(false)

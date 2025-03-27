@@ -12,7 +12,7 @@ import dayjs from "dayjs";
 import ReactPaginate from "react-paginate";
 
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = window.ENV?.API_URL;
 
 export default function Invoice(){
       const navigate = useNavigate();
@@ -22,7 +22,7 @@ export default function Invoice(){
 
       useEffect(()=>{
         const getData = async() =>{
-            axios.get('https://resbackend-three.vercel.app/api/invoice').
+            axios.get(API_URL+'/api/invoice').
             then((res)=>{
                 //console.log(res.data);
                 setTable(res.data);

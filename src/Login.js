@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = window.ENV?.API_URL;
 console.log("API_URL:", API_URL);
 
 function Login(){
@@ -12,15 +12,11 @@ function Login(){
     const handleChange = (e) =>{
         setUser({...user, [e.target.name]:e.target.value});
     }
- 
-    // const production = process.env.NODE_ENV === 'production' ? 
-    // process.env.REACT_APP_API_URL : 'http://localhost:5000'
-    
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
         const {username,password} = user
-        const res = await fetch('https://resbackend-three.vercel.app/api/login',{
+        const res = await fetch('http://localhost:5000/api/login',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json',

@@ -4,7 +4,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = window.ENV?.API_URL;
 
 function Signup(){
   
@@ -22,7 +22,7 @@ function Signup(){
         e.preventDefault();
       const {username,password} = user;
 
-        const res = await fetch("https://resbackend-three.vercel.app/api/signup/",{
+        const res = await fetch(API_URL+"/api/signup/",{
           method:"POST",
           headers:{
             "Content-type":"application/json",

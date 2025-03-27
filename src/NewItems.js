@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import FormatListBulletedRoundedIcon from '@mui/icons-material/FormatListBulletedRounded';
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = window.ENV?.API_URL;
 
 function NewItems(){
     const navigator = useNavigate();
@@ -15,7 +15,7 @@ function NewItems(){
     useEffect(()=>{
         const getData = async() =>{
             setLoading(true)
-            await axios.get('https://resbackend-three.vercel.app/gst-rates').then((res)=>{
+            await axios.get(API_URL+'/gst-rates').then((res)=>{
                 //console.log(res.data)
                 setData(res.data)
                // setLoading(false)
@@ -60,7 +60,7 @@ useEffect(() => {
   // Fetch the data from the API
   const fetchMenuData = async () => {
     try {
-      const response = await fetch('https://resbackend-three.vercel.app/api/categories');
+      const response = await fetch(API_URL+'/api/categories');
       const data = await response.json();
       setMenuItems(data.data); // Store the fetched data
       //console.log(data)
@@ -122,7 +122,7 @@ useEffect(() => {
      formData.append('price', formInputData.price);
      formData.append('file', formInputData.file);
      formData.append("priceWithGST", formInputData.priceWithGST);
-     await axios.post('https://resbackend-three.vercel.app/api/menu', formData)
+     await axios.post(API_URL+'/api/menu', formData)
      .then(res => {
       console.log(res);
       navigator('/admin/item')

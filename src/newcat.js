@@ -3,16 +3,44 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import * as Icons from "@mui/icons-material"; // Import all Material Icons
+import { MenuItem, Select } from "@mui/material"; // Import MUI Select dropdown
 
 // http://medium.com/@belloquadriolawale/file-upload-customization-952afc750a87
 
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = window.ENV?.API_URL;
 
 function NewCategory(){
     const navigator = useNavigate();
+    const [selectedIcon, setSelectedIcon] = useState("Fastfood");
+
+    // List of some Material Icons (You can extend this list)
+    const iconNames = Object.keys(Icons).filter(
+      (name) => !name.endsWith("Outlined") && !name.endsWith("Rounded") && !name.endsWith("Sharp")
+    );
+    //console.log(iconNames); 
+
+    const foodIcons = [
+      "Fastfood",          // 🍔 Burger / Fast Food
+      "Restaurant",        // 🍽️ Restaurant
+      "LocalCafe",         // ☕ Coffee
+      "Icecream",         // 🍦 Ice Cream
+      "LunchDining",      // 🍽️ Dining Plate
+      "LocalBar",         // 🍷 Wine / Bar
+      "LocalDrink",       // 🥤 Soft Drink
+      "BakeryDining",     // 🥐 Bakery
+      "RamenDining",      // 🍜 Ramen / Noodles
+      "KebabDining",      // 🌯 Kebab
+      "EmojiFoodBeverage",// 🥤 Beverage
+      "SetMeal",          // 🍱 Meal
+      "BrunchDining",     // 🥞 Brunch
+      "SoupKitchen",      // 🥣 Soup
+      "DinnerDining",     // 🍲 Dinner
+    ];
+    console.log(foodIcons)
     const [formInputData, setformInputData] = useState(
         {
         cat_name:'',
@@ -42,7 +70,8 @@ function NewCategory(){
        const formData = new FormData();
        formData.append('cat_name', formInputData.cat_name);
        formData.append('file', formInputData.file);
-       await axios.post('https://resbackend-three.vercel.app/api/categories', formData)
+       formData.append("icon_name", selectedIcon);
+       await axios.post('http://localhost:5000/api/categories', formData)
        .then(res => {
         console.log(res)
         //setTableData(res)
@@ -89,6 +118,26 @@ function NewCategory(){
             style={{ width: '100%' }}
             required
           />
+
+<div className="col-6 text_data2">
+      {/* Native HTML Select Dropdown */}
+      <select
+        value={selectedIcon}
+        onChange={(e) => setSelectedIcon(e.target.value)}
+        style={{ padding: "5px", fontSize: "16px", width: "100%" }}
+      >
+        {foodIcons.map((iconName) => (
+          <option key={iconName} value={iconName}>
+            {iconName}
+          </option>
+        ))}
+      </select>
+
+      {/* Display Selected Icon */}
+      <div style={{ marginTop: "20px" }}>
+        {React.createElement(Icons[selectedIcon], { style: { fontSize: 50, color: "#282828" } })}
+      </div>
+    </div>
 
           <label>Image</label>
           <div className="image-container" onClick={() => document.getElementById('file').click()}>

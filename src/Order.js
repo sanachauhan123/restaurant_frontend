@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactPaginate from "react-paginate";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = window.ENV?.API_URL;
 
 export default function Order(){
       const navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function Order(){
 
       useEffect(()=>{
         const getData = async() =>{
-            axios.get('https://resbackend-three.vercel.app/api/ordered').
+            axios.get(API_URL+'/api/ordered').
             then((res)=>{
                 //console.log(res.data);
                 setTable(res.data);
