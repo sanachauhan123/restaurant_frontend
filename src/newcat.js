@@ -39,8 +39,14 @@ function NewCategory(){
       "BrunchDining",     // 🥞 Brunch
       "SoupKitchen",      // 🥣 Soup
       "DinnerDining",     // 🍲 Dinner
+      "RiceBowl",
+      "LocalDining",
+      "Cake",
+      "Liquor",
+      "EggAlt",
+      "LocalPizza"
     ];
-    console.log(foodIcons)
+    //console.log(foodIcons)
     const [formInputData, setformInputData] = useState(
         {
         cat_name:'',
